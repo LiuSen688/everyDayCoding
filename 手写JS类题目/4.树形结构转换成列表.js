@@ -41,9 +41,22 @@ const data = [
   },
 ];
 
+// 期望结果：
+let result = [
+  { id: '1', name: '父节点1' },
+  { id: '1-1', name: '子节点1-1' },
+  { id: '1-1-1', name: '子节点1-1-1' },
+  { id: '1-1-2', name: '子节点1-1-2' },
+  { id: '1-1-1-1', name: '子节点1-1-1-1' },
+  { id: '1-1-1-2', name: '子节点1-1-1-2' },
+  { id: '2', name: '父节点2' },
+  { id: '2-1', name: '子节点2-1' }
+]
+
+
 // 第一种写法
 const list = [];
-function treeToList(trees) {
+function treeToList1(trees) {
   // 获取树结点内容，写入 list
   const convertList = (tree) => {
     const node = {};
@@ -56,18 +69,18 @@ function treeToList(trees) {
     convertList(tree);
     // 如果该项有children属性，继续递归
     if (tree.children) {
-      treeToList(tree.children);
+      treeToList1(tree.children);
     } else {
       return;
     }
   });
+  console.log("list=>", list);
   return list;
 }
-// treeToList(data);
-// console.log("list=>", list);
+treeToList1(data);
 
 // 第二种写法
-function treeToList(data) {
+function treeToList2(data) {
   let res = [];
   // 直接递归遍历到该数组项最深层
   const dfs = (tree) => {
@@ -86,4 +99,4 @@ function treeToList(data) {
   return res;
 }
 
-// treeToList(data);
+// treeToList2(data);
